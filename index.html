@@ -1,156 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E-Learning Platform</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduEra - eLearning Platform</title>
   <style>
+    /* Base Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* Fonts & Background */
     body {
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #fdfbfb, #ebedee);
+      color: #222;
     }
+
     header {
-      background: #003366;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
       color: white;
-      padding: 15px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      margin-top: 10px;
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: #f8f8f8;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ffd369;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 30px 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .card:hover {
+      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+      color: white;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      color: #2b3e50;
       text-align: center;
     }
-    .container {
-      padding: 20px;
+
+    h3 {
+      margin: 20px 0 10px;
+      color: #333;
     }
-    select, button {
-      padding: 8px;
-      margin: 5px 0;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+
+    ul.material-list {
+      list-style: none;
+      padding-left: 0;
     }
-    .materials {
-      margin-top: 20px;
+
+    ul.material-list li {
+      margin-bottom: 12px;
     }
-    .materials h3 {
-      color: #003366;
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    li {
-      margin: 5px 0;
-    }
-    a {
-      color: #0066cc;
+
+    ul.material-list li a {
       text-decoration: none;
+      color: #0077cc;
+      font-weight: 500;
+      transition: color 0.3s;
     }
-    a:hover {
+
+    ul.material-list li a:hover {
+      color: #ff6600;
       text-decoration: underline;
     }
-    /* Login screen */
-    #loginScreen {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #003366;
+
+    button {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background: linear-gradient(90deg, #ff6a00, #ee0979);
       color: white;
-    }
-    #loginScreen input {
-      padding: 10px;
-      margin: 8px;
-      border: none;
-      border-radius: 5px;
-      width: 250px;
-    }
-    #loginScreen button {
-      padding: 10px 20px;
-      border: none;
-      background: #ffcc00;
-      border-radius: 5px;
       font-weight: bold;
+      border: none;
+      border-radius: 8px;
       cursor: pointer;
+      transition: 0.3s ease;
     }
-    #mainApp {
-      display: none;
+
+    button:hover {
+      background: linear-gradient(90deg, #ee0979, #ff6a00);
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      color: white;
+      margin-top: 50px;
+    }
+
+    /* Login Page */
+    #loginPage {
+      max-width: 400px;
+      margin: 80px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    #loginPage h2 {
+      color: #2575fc;
+      margin-bottom: 20px;
+    }
+
+    #loginPage input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    #loginPage button {
+      width: 100%;
     }
   </style>
 </head>
 <body>
-  <!-- Login Screen -->
-  <div id="loginScreen">
-    <h1>Welcome to E-Learning</h1>
-    <p>Please login to continue</p>
-    <input type="text" id="userId" placeholder="Enter User ID">
-    <input type="password" id="password" placeholder="Enter Password">
+
+<header>
+  <h1>EduEra</h1>
+  <nav>
+    <ul><li><a href="#" onclick="goHome()">Home</a></li></ul>
+  </nav>
+</header>
+
+<div class="container">
+
+  <!-- Login Page -->
+  <div id="loginPage">
+    <h2>Login to EduEra</h2>
+    <input type="text" id="userId" placeholder="Enter User ID" />
+    <input type="password" id="userPass" placeholder="Enter Password" />
     <button onclick="login()">Login</button>
-    <p id="loginMessage"></p>
+    <p id="loginError" style="color:red; margin-top:10px;"></p>
   </div>
 
-  <!-- Main App -->
-  <div id="mainApp">
-    <header>
-      <h1>E-Learning Platform</h1>
-    </header>
-    <div class="container">
-      <h2>Select Class and Subject</h2>
-      <label for="classSelect">Class:</label>
-      <select id="classSelect" onchange="updateSubjects()">
-        <option value="">--Select Class--</option>
-        <option value="6">Class 6</option>
-        <option value="7">Class 7</option>
-        <option value="8">Class 8</option>
-        <option value="9">Class 9</option>
-        <option value="10">Class 10</option>
-        <option value="11">Class 11</option>
-        <option value="12">Class 12</option>
-      </select>
-
-      <label for="subjectSelect">Subject:</label>
-      <select id="subjectSelect">
-        <option value="">--Select Subject--</option>
-      </select>
-
-      <button onclick="showMaterials()">Show Materials</button>
-
-      <div class="materials" id="materials"></div>
-    </div>
+  <!-- Home View -->
+  <div id="home" style="display:none;">
+    <h2>Select Your Class</h2>
+    <div class="grid" id="classGrid"></div>
   </div>
 
-  <script>
-    // ✅ Login System
-    const validUsers = [
-      { userId: "student1", password: "1234" },
-      { userId: "mentor", password: "admin123" }
-    ];
+  <!-- Subjects View -->
+  <div id="subjects" style="display:none;">
+    <h2 id="subjectTitle">Subjects for Class</h2>
+    <div class="grid" id="subjectGrid"></div>
+    <button onclick="goHome()">← Back to Classes</button>
+  </div>
 
-    function login() {
-      const userId = document.getElementById("userId").value;
-      const password = document.getElementById("password").value;
-      const message = document.getElementById("loginMessage");
+  <!-- Material View -->
+  <div id="materials" style="display:none;">
+    <h2 id="materialTitle">Materials</h2>
 
-      const user = validUsers.find(u => u.userId === userId && u.password === password);
+    <section>
+      <h3>📘 NCERT Book</h3>
+      <ul class="material-list" id="ncertList"></ul>
+    </section>
 
-      if (user) {
-        document.getElementById("loginScreen").style.display = "none";
-        document.getElementById("mainApp").style.display = "block";
-      } else {
-        message.textContent = "Invalid User ID or Password!";
-        message.style.color = "red";
-      }
+    <section>
+      <h3>❓ Important Questions</h3>
+      <ul class="material-list" id="impqList"></ul>
+    </section>
+
+    <section>
+      <h3>📝 Practice Papers</h3>
+      <ul class="material-list" id="practiceList"></ul>
+    </section>
+
+    <section>
+      <h3>📄 CBSE Past 2 Year Papers</h3>
+      <ul class="material-list" id="cbseList"></ul>
+    </section>
+
+    <button onclick="goSubjects()">← Back to Subjects</button>
+  </div>
+
+</div>
+
+<footer>
+  <p>&copy; 2025 EduEra. All rights reserved.</p>
+</footer>
+
+<script>
+  // Demo credentials
+  const USER_ID = "student";
+  const USER_PASS = "password";
+
+  function login() {
+    const uid = document.getElementById('userId').value;
+    const upass = document.getElementById('userPass').value;
+    if (uid === USER_ID && upass === USER_PASS) {
+      document.getElementById('loginPage').style.display = 'none';
+      goHome();
+    } else {
+      document.getElementById('loginError').innerText = "Invalid User ID or Password!";
     }
+  }
 
-    // ✅ Dataset (Classes 6–12, NCERT + Practice Papers)
-    const data = {
-      subjects: {
-        "6": ["Mathematics", "Science", "English"],
-        "7": ["Mathematics", "Science", "English"],
-        "8": ["Mathematics", "Science", "English"],
-        "9": ["Mathematics", "Science", "English"],
-        "10": ["Mathematics", "Science", "English"],
-        "11": ["Mathematics", "Physics", "Chemistry", "Biology", "English"],
-        "12": ["Mathematics", "Physics", "Chemistry", "Biology", "English"]
-      },
+  // Dataset (NCERT + Practice + ImpQ + CBSE) -- you already asked me to add, we’ll keep that part same here
+  const data = {
+    classes: ['6','7','8','9','10','11','12'],
+    subjects: {
+      '6': ['Mathematics','Science','English'],
+      '7': ['Mathematics','Science','English'],
+      '8': ['Mathematics','Science','English'],
+      '9': ['Mathematics','Science','English'],
+      '10': ['Mathematics','Science','English'],
+      '11': ['Physics','Chemistry','Biology','Mathematics','English'],
+      '12': ['Physics','Chemistry','Biology','Mathematics','English']
+    },
       materials: {
         // ✅ Class 6
         "6_Mathematics": {
@@ -283,54 +389,91 @@
       }
     };
 
-    // ✅ Update subjects dropdown
-    function updateSubjects() {
-      const classVal = document.getElementById("classSelect").value;
-      const subjectSelect = document.getElementById("subjectSelect");
-      subjectSelect.innerHTML = '<option value="">--Select Subject--</option>';
-      if (data.subjects[classVal]) {
-        data.subjects[classVal].forEach(sub => {
-          let opt = document.createElement("option");
-          opt.value = sub;
-          opt.textContent = sub;
-          subjectSelect.appendChild(opt);
+
+  const classGrid = document.getElementById('classGrid');
+  const subjectGrid = document.getElementById('subjectGrid');
+  const ncertList = document.getElementById('ncertList');
+  const impqList = document.getElementById('impqList');
+  const practiceList = document.getElementById('practiceList');
+  const cbseList = document.getElementById('cbseList');
+
+  const homeView = document.getElementById('home');
+  const subjectsView = document.getElementById('subjects');
+  const materialsView = document.getElementById('materials');
+
+  function goHome() {
+    homeView.style.display = 'block';
+    subjectsView.style.display = 'none';
+    materialsView.style.display = 'none';
+  }
+
+  function goSubjects() {
+    homeView.style.display = 'none';
+    subjectsView.style.display = 'block';
+    materialsView.style.display = 'none';
+  }
+
+  function goMaterials() {
+    homeView.style.display = 'none';
+    subjectsView.style.display = 'none';
+    materialsView.style.display = 'block';
+  }
+
+  function loadClasses() {
+    data.classes.forEach(cls => {
+      const div = document.createElement('div');
+      div.className = 'card';
+      div.innerText = `Class ${cls}`;
+      div.onclick = () => loadSubjects(cls);
+      classGrid.appendChild(div);
+    });
+  }
+
+  function loadSubjects(cls) {
+    subjectGrid.innerHTML = '';
+    document.getElementById('subjectTitle').innerText = `Subjects for Class ${cls}`;
+    data.subjects[cls].forEach(sub => {
+      const div = document.createElement('div');
+      div.className = 'card';
+      div.innerText = sub;
+      div.onclick = () => loadMaterials(cls, sub);
+      subjectGrid.appendChild(div);
+    });
+    goSubjects();
+  }
+
+  function loadMaterials(cls, sub) {
+    const materialKey = `${cls}_${sub}`;
+    document.getElementById('materialTitle').innerText = `${sub} - Class ${cls}`;
+
+    const sectionMap = {
+      ncert: ncertList,
+      impq: impqList,
+      practice: practiceList,
+      cbse: cbseList
+    };
+
+    Object.entries(sectionMap).forEach(([section, ul]) => {
+      ul.innerHTML = '';
+      if (data.materials[materialKey] && data.materials[materialKey][section]) {
+        data.materials[materialKey][section].forEach(item => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a>`;
+          ul.appendChild(li);
         });
-      }
-    }
-
-    // ✅ Show materials
-    function showMaterials() {
-      const classVal = document.getElementById("classSelect").value;
-      const subjectVal = document.getElementById("subjectSelect").value;
-      const key = `${classVal}_${subjectVal}`;
-      const container = document.getElementById("materials");
-      container.innerHTML = "";
-
-      if (data.materials[key]) {
-        const mat = data.materials[key];
-        let html = `<h3>${subjectVal} - Class ${classVal}</h3>`;
-        
-        if (mat.ncert?.length) {
-          html += "<h4>NCERT Books</h4><ul>";
-          mat.ncert.forEach(item => {
-            html += `<li><a href="${item.link}" target="_blank">${item.title}</a></li>`;
-          });
-          html += "</ul>";
-        }
-
-        if (mat.practice?.length) {
-          html += "<h4>Practice Papers</h4><ul>";
-          mat.practice.forEach(item => {
-            html += `<li><a href="${item.link}" target="_blank">${item.title}</a></li>`;
-          });
-          html += "</ul>";
-        }
-
-        container.innerHTML = html;
       } else {
-        container.innerHTML = "<p>No materials available</p>";
+        ul.innerHTML = '<li>No content yet.</li>';
       }
-    }
-  </script>
+    });
+
+    goMaterials();
+  }
+
+  loadClasses();
+</script>
+
 </body>
 </html>
+
+
+  
