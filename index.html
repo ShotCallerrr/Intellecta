@@ -8,7 +8,6 @@
     /* Base Reset */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* Fonts & Color Palette */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #f4f6f9;
@@ -73,6 +72,11 @@
       color: #2b3e50;
     }
 
+    h3 {
+      margin: 15px 0 10px;
+      color: #444;
+    }
+
     ul.material-list {
       list-style: none;
       padding-left: 0;
@@ -118,8 +122,8 @@
 
 <header>
   <h1>Intellecta</h1>
-  <nav>
-    <ul><li><a href="#" onclick="goHome()">Home</a></li></ul>
+  <nav role="navigation" aria-label="Main Navigation">
+    <ul><li><a href="#" onclick="goHome()">🏠 Home</a></li></ul>
   </nav>
 </header>
 
@@ -128,9 +132,7 @@
   <!-- Home View -->
   <div id="home">
     <h2>Select Your Class</h2>
-    <div class="grid" id="classGrid">
-      <!-- JS Populates -->
-    </div>
+    <div class="grid" id="classGrid"></div>
   </div>
 
   <!-- Subjects View -->
@@ -186,24 +188,68 @@
       '12': ['Physics','Chemistry','Biology','Mathematics','English']
     },
     materials: {
-      '9_Science': {
-        ncert: [{ title: "Class 9 Science NCERT Book", link: "https://ncert.nic.in/textbook.php?iesc1=0-14" }],
-        impq: [{ title: "Set 1 Important Questions", link: "#" }],
-        practice: [{ title: "Science Practice Paper 1", link: "#" }],
-        cbse: [{ title: "CBSE 2024 Science Paper", link: "#" }]
-      },
-      '10_Mathematics': {
-        ncert: [{ title: "Class 10 Maths NCERT Book", link: "https://ncert.nic.in/textbook.php?emhm1=0-14" }],
-        impq: [{ title: "Set 1 Important Questions", link: "#" }],
-        practice: [{ title: "Maths Practice Paper", link: "#" }],
-        cbse: [{ title: "CBSE 2024 Maths Paper", link: "#" }]
-      },
-      '12_Physics': {
-        ncert: [{ title: "Class 12 Physics NCERT Book", link: "https://ncert.nic.in/textbook.php?keph1=0-14" }],
-        impq: [{ title: "Set 1 Important Questions", link: "#" }],
-        practice: [{ title: "Physics Practice Paper", link: "#" }],
-        cbse: [{ title: "CBSE 2024 Physics Paper", link: "#" }]
-      }
+      // ✅ Class 6
+      '6_Mathematics': { ncert: [{ title: "Class 6 Maths NCERT Book", link: "https://ncert.nic.in/textbook.php?femh1=0-14" }], impq: [], practice: [], cbse: [] },
+      '6_Science': { ncert: [{ title: "Class 6 Science NCERT Book", link: "https://ncert.nic.in/textbook.php?fesc1=0-16" }], impq: [], practice: [], cbse: [] },
+      '6_English': { ncert: [
+        { title: "Class 6 English (Honeysuckle)", link: "https://ncert.nic.in/textbook.php?fesh1=0-10" },
+        { title: "Class 6 English (A Pact With The Sun)", link: "https://ncert.nic.in/textbook.php?feap1=0-10" }
+      ], impq: [], practice: [], cbse: [] },
+
+      // ✅ Class 7
+      '7_Mathematics': { ncert: [{ title: "Class 7 Maths NCERT Book", link: "https://ncert.nic.in/textbook.php?femh2=0-15" }], impq: [], practice: [], cbse: [] },
+      '7_Science': { ncert: [{ title: "Class 7 Science NCERT Book", link: "https://ncert.nic.in/textbook.php?fesc2=0-18" }], impq: [], practice: [], cbse: [] },
+      '7_English': { ncert: [
+        { title: "Class 7 English (Honeycomb)", link: "https://ncert.nic.in/textbook.php?fehc1=0-10" },
+        { title: "Class 7 English (An Alien Hand)", link: "https://ncert.nic.in/textbook.php?feah1=0-10" }
+      ], impq: [], practice: [], cbse: [] },
+
+      // ✅ Class 8
+      '8_Mathematics': { ncert: [{ title: "Class 8 Maths NCERT Book", link: "https://ncert.nic.in/textbook.php?femh3=0-16" }], impq: [], practice: [], cbse: [] },
+      '8_Science': { ncert: [{ title: "Class 8 Science NCERT Book", link: "https://ncert.nic.in/textbook.php?fesc3=0-16" }], impq: [], practice: [], cbse: [] },
+      '8_English': { ncert: [
+        { title: "Class 8 English (Honeydew)", link: "https://ncert.nic.in/textbook.php?fehd1=0-10" },
+        { title: "Class 8 English (It So Happened)", link: "https://ncert.nic.in/textbook.php?feis1=0-10" }
+      ], impq: [], practice: [], cbse: [] },
+
+      // ✅ Class 9
+      '9_Mathematics': { ncert: [{ title: "Class 9 Maths NCERT Book", link: "https://ncert.nic.in/textbook.php?iemh1=0-16" }], impq: [], practice: [], cbse: [] },
+      '9_Science': { ncert: [{ title: "Class 9 Science NCERT Book", link: "https://ncert.nic.in/textbook.php?iesc1=0-14" }],
+        impq: [{ title: "Set 1 Important Questions", link: "#" }], practice: [{ title: "Science Practice Paper 1", link: "#" }], cbse: [{ title: "CBSE 2024 Science Paper", link: "#" }] },
+      '9_English': { ncert: [
+        { title: "Class 9 English (Beehive)", link: "https://ncert.nic.in/textbook.php?iebe1=0-10" },
+        { title: "Class 9 English (Moments)", link: "https://ncert.nic.in/textbook.php?iemo1=0-10" }
+      ], impq: [], practice: [], cbse: [] },
+
+      // ✅ Class 10
+      '10_Mathematics': { ncert: [{ title: "Class 10 Maths NCERT Book", link: "https://ncert.nic.in/textbook.php?emhm1=0-14" }],
+        impq: [{ title: "Set 1 Important Questions", link: "#" }], practice: [{ title: "Maths Practice Paper", link: "#" }], cbse: [{ title: "CBSE 2024 Maths Paper", link: "#" }] },
+      '10_Science': { ncert: [{ title: "Class 10 Science NCERT Book", link: "https://ncert.nic.in/textbook.php?jesc1=0-16" }], impq: [], practice: [], cbse: [] },
+      '10_English': { ncert: [
+        { title: "Class 10 English (First Flight)", link: "https://ncert.nic.in/textbook.php?jeff1=0-10" },
+        { title: "Class 10 English (Footprints Without Feet)", link: "https://ncert.nic.in/textbook.php?jeff2=0-10" }
+      ], impq: [], practice: [], cbse: [] },
+
+      // ✅ Class 11
+      '11_Physics': { ncert: [{ title: "Class 11 Physics NCERT Book", link: "https://ncert.nic.in/textbook.php?keph1=0-14" }], impq: [], practice: [], cbse: [] },
+      '11_Chemistry': { ncert: [{ title: "Class 11 Chemistry NCERT Book", link: "https://ncert.nic.in/textbook.php?kech1=0-14" }], impq: [], practice: [], cbse: [] },
+      '11_Biology': { ncert: [{ title: "Class 11 Biology NCERT Book", link: "https://ncert.nic.in/textbook.php?kebo1=0-10" }], impq: [], practice: [], cbse: [] },
+      '11_Mathematics': { ncert: [{ title: "Class 11 Maths NCERT Book", link: "https://ncert.nic.in/textbook.php?kemh1=0-14" }], impq: [], practice: [], cbse: [] },
+      '11_English': { ncert: [
+        { title: "Class 11 English (Hornbill)", link: "https://ncert.nic.in/textbook.php?kehb1=0-08" },
+        { title: "Class 11 English (Snapshots)", link: "https://ncert.nic.in/textbook.php?kesp1=0-08" }
+      ], impq: [], practice: [], cbse: [] },
+
+      // ✅ Class 12
+      '12_Physics': { ncert: [{ title: "Class 12 Physics NCERT Book", link: "https://ncert.nic.in/textbook.php?leph1=0-14" }],
+        impq: [{ title: "Set 1 Important Questions", link: "#" }], practice: [{ title: "Physics Practice Paper", link: "#" }], cbse: [{ title: "CBSE 2024 Physics Paper", link: "#" }] },
+      '12_Chemistry': { ncert: [{ title: "Class 12 Chemistry NCERT Book", link: "https://ncert.nic.in/textbook.php?lech1=0-14" }], impq: [], practice: [], cbse: [] },
+      '12_Biology': { ncert: [{ title: "Class 12 Biology NCERT Book", link: "https://ncert.nic.in/textbook.php?lebo1=0-10" }], impq: [], practice: [], cbse: [] },
+      '12_Mathematics': { ncert: [{ title: "Class 12 Maths NCERT Book", link: "https://ncert.nic.in/textbook.php?lemh1=0-14" }], impq: [], practice: [], cbse: [] },
+      '12_English': { ncert: [
+        { title: "Class 12 English (Flamingo)", link: "https://ncert.nic.in/textbook.php?lefl1=0-10" },
+        { title: "Class 12 English (Vistas)", link: "https://ncert.nic.in/textbook.php?levi1=0-08" }
+      ], impq: [], practice: [], cbse: [] }
     }
   };
 
@@ -265,7 +311,7 @@
 
   function loadMaterials(cls, sub) {
     selectedSubject = sub;
-    const key = `${cls}_${sub}`;
+    const materialKey = `${cls}_${sub}`;
     document.getElementById('materialTitle').innerText = `${sub} - Class ${cls}`;
 
     const sectionMap = {
@@ -275,18 +321,18 @@
       cbse: cbseList
     };
 
-    Object.keys(sectionMap).forEach(key => sectionMap[key].innerHTML = '<li>No content yet.</li>');
-
-    if (data.materials[key]) {
-      for (const [section, list] of Object.entries(data.materials[key])) {
-        sectionMap[section].innerHTML = '';
-        list.forEach(item => {
+    Object.entries(sectionMap).forEach(([section, ul]) => {
+      ul.innerHTML = '';
+      if (data.materials[materialKey] && data.materials[materialKey][section]) {
+        data.materials[materialKey][section].forEach(item => {
           const li = document.createElement('li');
           li.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a>`;
-          sectionMap[section].appendChild(li);
+          ul.appendChild(li);
         });
+      } else {
+        ul.innerHTML = '<li>No content yet.</li>';
       }
-    }
+    });
 
     goMaterials();
   }
