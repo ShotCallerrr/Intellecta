@@ -1,430 +1,336 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Intellecta - eLearning Platform</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Learning Platform</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f4f6f9;
-      color: #222;
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
       margin: 0;
+      padding: 0;
     }
-
     header {
-      background-color: #2b3e50;
+      background: #003366;
       color: white;
-      padding: 1.5rem;
+      padding: 15px;
       text-align: center;
     }
-
-    nav ul {
-      margin-top: 10px;
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    nav ul li a {
-      color: #f8f8f8;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
     .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 30px 20px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background-color: #ffffff;
-      border-radius: 8px;
-      padding: 25px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-align: center;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
-
-    .card:hover {
-      background-color: #e8f0fe;
-      transform: translateY(-3px);
-    }
-
-    h2 {
-      margin-bottom: 20px;
-      font-size: 1.5rem;
-      color: #2b3e50;
-    }
-
-    h3 {
-      margin: 15px 0 10px;
-      color: #444;
-    }
-
-    ul.material-list {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    ul.material-list li {
-      margin-bottom: 12px;
-    }
-
-    ul.material-list li a {
-      text-decoration: none;
-      color: #0077cc;
-    }
-
-    ul.material-list li a:hover {
-      text-decoration: underline;
-    }
-
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #2b3e50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #1f2e3d;
-    }
-
-    footer {
-      text-align: center;
       padding: 20px;
-      background-color: #2b3e50;
-      color: white;
-      margin-top: 50px;
     }
-
-    /* Login Page Styling */
-    #login {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 90vh;
-    }
-
-    .login-box {
-      background: white;
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      width: 300px;
-      text-align: center;
-    }
-
-    .login-box h2 {
-      margin-bottom: 20px;
-    }
-
-    .login-box input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
+    select, button {
+      padding: 8px;
+      margin: 5px 0;
       border-radius: 5px;
       border: 1px solid #ccc;
     }
-
-    .error {
-      color: red;
-      font-size: 0.9rem;
-      margin-top: 5px;
+    .materials {
+      margin-top: 20px;
+    }
+    .materials h3 {
+      color: #003366;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      margin: 5px 0;
+    }
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    /* Login screen */
+    #loginScreen {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #003366;
+      color: white;
+    }
+    #loginScreen input {
+      padding: 10px;
+      margin: 8px;
+      border: none;
+      border-radius: 5px;
+      width: 250px;
+    }
+    #loginScreen button {
+      padding: 10px 20px;
+      border: none;
+      background: #ffcc00;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #mainApp {
+      display: none;
     }
   </style>
 </head>
 <body>
-
-<header>
-  <h1>Intellecta</h1>
-  <nav>
-    <ul><li><a href="#" onclick="goHome()">🏠 Home</a></li></ul>
-  </nav>
-</header>
-
-<!-- ✅ LOGIN PAGE -->
-<div id="login">
-  <div class="login-box">
-    <h2>Login</h2>
-    <input type="text" id="userid" placeholder="User ID" />
-    <input type="password" id="password" placeholder="Password" />
+  <!-- Login Screen -->
+  <div id="loginScreen">
+    <h1>Welcome to E-Learning</h1>
+    <p>Please login to continue</p>
+    <input type="text" id="userId" placeholder="Enter User ID">
+    <input type="password" id="password" placeholder="Enter Password">
     <button onclick="login()">Login</button>
-    <p class="error" id="errorMsg"></p>
+    <p id="loginMessage"></p>
   </div>
-</div>
 
-<!-- ✅ MAIN APP CONTENT -->
-<div id="mainApp" style="display:none;">
-  <div class="container">
+  <!-- Main App -->
+  <div id="mainApp">
+    <header>
+      <h1>E-Learning Platform</h1>
+    </header>
+    <div class="container">
+      <h2>Select Class and Subject</h2>
+      <label for="classSelect">Class:</label>
+      <select id="classSelect" onchange="updateSubjects()">
+        <option value="">--Select Class--</option>
+        <option value="6">Class 6</option>
+        <option value="7">Class 7</option>
+        <option value="8">Class 8</option>
+        <option value="9">Class 9</option>
+        <option value="10">Class 10</option>
+        <option value="11">Class 11</option>
+        <option value="12">Class 12</option>
+      </select>
 
-    <!-- Home View -->
-    <div id="home">
-      <h2>Select Your Class</h2>
-      <div class="grid" id="classGrid"></div>
+      <label for="subjectSelect">Subject:</label>
+      <select id="subjectSelect">
+        <option value="">--Select Subject--</option>
+      </select>
+
+      <button onclick="showMaterials()">Show Materials</button>
+
+      <div class="materials" id="materials"></div>
     </div>
-
-    <!-- Subjects View -->
-    <div id="subjects" style="display:none;">
-      <h2 id="subjectTitle">Subjects for Class</h2>
-      <div class="grid" id="subjectGrid"></div>
-      <button onclick="goHome()">← Back to Classes</button>
-    </div>
-
-    <!-- Material View -->
-    <div id="materials" style="display:none;">
-      <h2 id="materialTitle">Materials</h2>
-
-      <section>
-        <h3>📘 NCERT Book</h3>
-        <ul class="material-list" id="ncertList"></ul>
-      </section>
-
-      <section>
-        <h3>❓ Important Questions</h3>
-        <ul class="material-list" id="impqList"></ul>
-      </section>
-
-      <section>
-        <h3>📝 Practice Papers</h3>
-        <ul class="material-list" id="practiceList"></ul>
-      </section>
-
-      <section>
-        <h3>📄 CBSE Past 2 Year Papers</h3>
-        <ul class="material-list" id="cbseList"></ul>
-      </section>
-
-      <button onclick="goSubjects()">← Back to Subjects</button>
-    </div>
-
   </div>
-</div>
 
-<footer>
-  <p>&copy; 2025 Intellecta. All rights reserved.</p>
-</footer>
+  <script>
+    // ✅ Login System
+    const validUsers = [
+      { userId: "student1", password: "1234" },
+      { userId: "mentor", password: "admin123" }
+    ];
 
-<script>
-  /********************
-   LOGIN SYSTEM
-  ********************/
-  function login() {
-    const user = document.getElementById("userid").value;
-    const pass = document.getElementById("password").value;
-    const errorMsg = document.getElementById("errorMsg");
+    function login() {
+      const userId = document.getElementById("userId").value;
+      const password = document.getElementById("password").value;
+      const message = document.getElementById("loginMessage");
 
-    // Hardcoded credentials
-    const validUser = "student";
-    const validPass = "1234";
+      const user = validUsers.find(u => u.userId === userId && u.password === password);
 
-    if (user === validUser && pass === validPass) {
-      document.getElementById("login").style.display = "none";
-      document.getElementById("mainApp").style.display = "block";
-    } else {
-      errorMsg.innerText = "❌ Invalid User ID or Password!";
-    }
-  }
-
-  /********************
-   APP DATA (Classes 6–12, NCERT links included)
-  ********************/
-  const data = {
-    classes: ['6','7','8','9','10','11','12'],
-    subjects: {
-      '6': ['Mathematics','Science','English'],
-      '7': ['Mathematics','Science','English'],
-      '8': ['Mathematics','Science','English'],
-      '9': ['Mathematics','Science','English'],
-      '10': ['Mathematics','Science','English'],
-      '11': ['Physics','Chemistry','Biology','Mathematics','English'],
-      '12': ['Physics','Chemistry','Biology','Mathematics','English']
-    },
-    materials: {
-      // ✅ CLASS 6
-      "6_Mathematics": {
-        ncert: [{title:"NCERT Class 6 Mathematics",link:"https://ncert.nic.in/textbook/pdf/femh1dd.zip"}]
-      },
-      "6_Science": {
-        ncert: [{title:"NCERT Class 6 Science",link:"https://ncert.nic.in/textbook/pdf/fesc1dd.zip"}]
-      },
-      "6_English": {
-        ncert: [{title:"NCERT Class 6 English",link:"https://ncert.nic.in/textbook/pdf/fegn1dd.zip"}]
-      },
-
-      // ✅ CLASS 7
-      "7_Mathematics": {
-        ncert: [{title:"NCERT Class 7 Mathematics",link:"https://ncert.nic.in/textbook/pdf/gemh1dd.zip"}]
-      },
-      "7_Science": {
-        ncert: [{title:"NCERT Class 7 Science",link:"https://ncert.nic.in/textbook/pdf/gesc1dd.zip"}]
-      },
-      "7_English": {
-        ncert: [{title:"NCERT Class 7 English",link:"https://ncert.nic.in/textbook/pdf/gegn1dd.zip"}]
-      },
-
-      // ✅ CLASS 8
-      "8_Mathematics": {
-        ncert: [{title:"NCERT Class 8 Mathematics",link:"https://ncert.nic.in/textbook/pdf/hemh1dd.zip"}]
-      },
-      "8_Science": {
-        ncert: [{title:"NCERT Class 8 Science",link:"https://ncert.nic.in/textbook/pdf/hesc1dd.zip"}]
-      },
-      "8_English": {
-        ncert: [{title:"NCERT Class 8 English",link:"https://ncert.nic.in/textbook/pdf/hegn1dd.zip"}]
-      },
-
-      // ✅ CLASS 9
-      "9_Mathematics": {
-        ncert: [{title:"NCERT Class 9 Mathematics",link:"https://ncert.nic.in/textbook/pdf/jemh1dd.zip"}]
-      },
-      "9_Science": {
-        ncert: [{title:"NCERT Class 9 Science",link:"https://ncert.nic.in/textbook/pdf/jesc1dd.zip"}]
-      },
-      "9_English": {
-        ncert: [{title:"NCERT Class 9 English",link:"https://ncert.nic.in/textbook/pdf/jegn1dd.zip"}]
-      },
-
-      // ✅ CLASS 10
-      "10_Mathematics": {
-        ncert: [{title:"NCERT Class 10 Mathematics",link:"https://ncert.nic.in/textbook/pdf/kemh1dd.zip"}]
-      },
-      "10_Science": {
-        ncert: [{title:"NCERT Class 10 Science",link:"https://ncert.nic.in/textbook/pdf/kesc1dd.zip"}]
-      },
-      "10_English": {
-        ncert: [{title:"NCERT Class 10 English",link:"https://ncert.nic.in/textbook/pdf/kegn1dd.zip"}]
-      },
-
-      // ✅ CLASS 11
-      "11_Physics": {
-        ncert: [{title:"NCERT Class 11 Physics",link:"https://ncert.nic.in/textbook/pdf/leep1dd.zip"}]
-      },
-      "11_Chemistry": {
-        ncert: [{title:"NCERT Class 11 Chemistry",link:"https://ncert.nic.in/textbook/pdf/lech1dd.zip"}]
-      },
-      "11_Biology": {
-        ncert: [{title:"NCERT Class 11 Biology",link:"https://ncert.nic.in/textbook/pdf/lebo1dd.zip"}]
-      },
-      "11_Mathematics": {
-        ncert: [{title:"NCERT Class 11 Mathematics",link:"https://ncert.nic.in/textbook/pdf/lemh1dd.zip"}]
-      },
-      "11_English": {
-        ncert: [{title:"NCERT Class 11 English",link:"https://ncert.nic.in/textbook/pdf/leeg1dd.zip"}]
-      },
-
-      // ✅ CLASS 12
-      "12_Physics": {
-        ncert: [{title:"NCERT Class 12 Physics",link:"https://ncert.nic.in/textbook/pdf/leep1dd.zip"}]
-      },
-      "12_Chemistry": {
-        ncert: [{title:"NCERT Class 12 Chemistry",link:"https://ncert.nic.in/textbook/pdf/lech1dd.zip"}]
-      },
-      "12_Biology": {
-        ncert: [{title:"NCERT Class 12 Biology",link:"https://ncert.nic.in/textbook/pdf/lebo1dd.zip"}]
-      },
-      "12_Mathematics": {
-        ncert: [{title:"NCERT Class 12 Mathematics",link:"https://ncert.nic.in/textbook/pdf/lemh1dd.zip"}]
-      },
-      "12_English": {
-        ncert: [{title:"NCERT Class 12 English",link:"https://ncert.nic.in/textbook/pdf/leeg1dd.zip"}]
-      }
-    }
-  };
-
-  /********************
-   APP LOGIC
-  ********************/
-  const classGrid = document.getElementById('classGrid');
-  const subjectGrid = document.getElementById('subjectGrid');
-  const ncertList = document.getElementById('ncertList');
-  const impqList = document.getElementById('impqList');
-  const practiceList = document.getElementById('practiceList');
-  const cbseList = document.getElementById('cbseList');
-
-  const homeView = document.getElementById('home');
-  const subjectsView = document.getElementById('subjects');
-  const materialsView = document.getElementById('materials');
-
-  function goHome() {
-    homeView.style.display = 'block';
-    subjectsView.style.display = 'none';
-    materialsView.style.display = 'none';
-  }
-
-  function goSubjects() {
-    homeView.style.display = 'none';
-    subjectsView.style.display = 'block';
-    materialsView.style.display = 'none';
-  }
-
-  function goMaterials() {
-    homeView.style.display = 'none';
-    subjectsView.style.display = 'none';
-    materialsView.style.display = 'block';
-  }
-
-  function loadClasses() {
-    data.classes.forEach(cls => {
-      const div = document.createElement('div');
-      div.className = 'card';
-      div.innerText = `Class ${cls}`;
-      div.onclick = () => loadSubjects(cls);
-      classGrid.appendChild(div);
-    });
-  }
-
-  function loadSubjects(cls) {
-    subjectGrid.innerHTML = '';
-    document.getElementById('subjectTitle').innerText = `Subjects for Class ${cls}`;
-    data.subjects[cls].forEach(sub => {
-      const div = document.createElement('div');
-      div.className = 'card';
-      div.innerText = sub;
-      div.onclick = () => loadMaterials(cls, sub);
-      subjectGrid.appendChild(div);
-    });
-    goSubjects();
-  }
-
-  function loadMaterials(cls, sub) {
-    const materialKey = `${cls}_${sub}`;
-    document.getElementById('materialTitle').innerText = `${sub} - Class ${cls}`;
-
-    const sectionMap = { ncert: ncertList, impq: impqList, practice: practiceList, cbse: cbseList };
-
-    Object.entries(sectionMap).forEach(([section, ul]) => {
-      ul.innerHTML = '';
-      if (data.materials[materialKey] && data.materials[materialKey][section]) {
-        data.materials[materialKey][section].forEach(item => {
-          const li = document.createElement('li');
-          li.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a>`;
-          ul.appendChild(li);
-        });
+      if (user) {
+        document.getElementById("loginScreen").style.display = "none";
+        document.getElementById("mainApp").style.display = "block";
       } else {
-        ul.innerHTML = '<li>No content yet.</li>';
+        message.textContent = "Invalid User ID or Password!";
+        message.style.color = "red";
       }
-    });
+    }
 
-    goMaterials();
-  }
+    // ✅ Dataset (Classes 6–12, NCERT + Practice Papers)
+    const data = {
+      subjects: {
+        "6": ["Mathematics", "Science", "English"],
+        "7": ["Mathematics", "Science", "English"],
+        "8": ["Mathematics", "Science", "English"],
+        "9": ["Mathematics", "Science", "English"],
+        "10": ["Mathematics", "Science", "English"],
+        "11": ["Mathematics", "Physics", "Chemistry", "Biology", "English"],
+        "12": ["Mathematics", "Physics", "Chemistry", "Biology", "English"]
+      },
+      materials: {
+        // ✅ Class 6
+        "6_Mathematics": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?femh1=0-14" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+        "6_Science": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?fesc1=0-16" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+        "6_English": {
+          ncert: [
+            { title: "Honeysuckle", link: "https://ncert.nic.in/textbook.php?fesh1=0-10" },
+            { title: "A Pact With The Sun", link: "https://ncert.nic.in/textbook.php?feap1=0-10" }
+          ],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
 
-  loadClasses();
-</script>
+        // ✅ Class 7
+        "7_Mathematics": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?femh2=0-15" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+        "7_Science": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?fesc2=0-18" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+        "7_English": {
+          ncert: [
+            { title: "Honeycomb", link: "https://ncert.nic.in/textbook.php?fehc1=0-10" },
+            { title: "An Alien Hand", link: "https://ncert.nic.in/textbook.php?feah1=0-10" }
+          ],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
 
+        // ✅ Class 8
+        "8_Mathematics": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?femh3=0-16" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+        "8_Science": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?fesc3=0-16" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+        "8_English": {
+          ncert: [
+            { title: "Honeydew", link: "https://ncert.nic.in/textbook.php?fehd1=0-10" },
+            { title: "It So Happened", link: "https://ncert.nic.in/textbook.php?feis1=0-10" }
+          ],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+
+        // ✅ Class 9
+        "9_Mathematics": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?iemh1=0-16" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+        "9_Science": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?iesc1=0-14" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+        "9_English": {
+          ncert: [
+            { title: "Beehive", link: "https://ncert.nic.in/textbook.php?iebe1=0-10" },
+            { title: "Moments", link: "https://ncert.nic.in/textbook.php?iemo1=0-10" }
+          ],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+
+        // ✅ Class 10
+        "10_Mathematics": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?emhm1=0-14" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+        "10_Science": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?jesc1=0-16" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+        "10_English": {
+          ncert: [
+            { title: "First Flight", link: "https://ncert.nic.in/textbook.php?jeff1=0-10" },
+            { title: "Footprints Without Feet", link: "https://ncert.nic.in/textbook.php?jeff2=0-10" }
+          ],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+
+        // ✅ Class 11
+        "11_Mathematics": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?kemh1=0-16" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+        "11_Physics": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?keph1=0-14" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+        "11_Chemistry": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?kecm1=0-14" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+        "11_Biology": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?kebo1=0-14" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+        "11_English": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?keeg1=0-14" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+
+        // ✅ Class 12
+        "12_Mathematics": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?lemh1=0-16" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+        "12_Physics": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?leph1=0-14" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+        "12_Chemistry": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?lecm1=0-14" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+        "12_Biology": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?lebo1=0-14" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        },
+        "12_English": {
+          ncert: [{ title: "NCERT Book", link: "https://ncert.nic.in/textbook.php?leeg1=0-14" }],
+          practice: [{ title: "Practice Paper 1", link: "#" },{ title: "Practice Paper 2", link: "#" }]
+        }
+      }
+    };
+
+    // ✅ Update subjects dropdown
+    function updateSubjects() {
+      const classVal = document.getElementById("classSelect").value;
+      const subjectSelect = document.getElementById("subjectSelect");
+      subjectSelect.innerHTML = '<option value="">--Select Subject--</option>';
+      if (data.subjects[classVal]) {
+        data.subjects[classVal].forEach(sub => {
+          let opt = document.createElement("option");
+          opt.value = sub;
+          opt.textContent = sub;
+          subjectSelect.appendChild(opt);
+        });
+      }
+    }
+
+    // ✅ Show materials
+    function showMaterials() {
+      const classVal = document.getElementById("classSelect").value;
+      const subjectVal = document.getElementById("subjectSelect").value;
+      const key = `${classVal}_${subjectVal}`;
+      const container = document.getElementById("materials");
+      container.innerHTML = "";
+
+      if (data.materials[key]) {
+        const mat = data.materials[key];
+        let html = `<h3>${subjectVal} - Class ${classVal}</h3>`;
+        
+        if (mat.ncert?.length) {
+          html += "<h4>NCERT Books</h4><ul>";
+          mat.ncert.forEach(item => {
+            html += `<li><a href="${item.link}" target="_blank">${item.title}</a></li>`;
+          });
+          html += "</ul>";
+        }
+
+        if (mat.practice?.length) {
+          html += "<h4>Practice Papers</h4><ul>";
+          mat.practice.forEach(item => {
+            html += `<li><a href="${item.link}" target="_blank">${item.title}</a></li>`;
+          });
+          html += "</ul>";
+        }
+
+        container.innerHTML = html;
+      } else {
+        container.innerHTML = "<p>No materials available</p>";
+      }
+    }
+  </script>
 </body>
 </html>
-
