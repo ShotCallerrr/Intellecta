@@ -5,13 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Intellecta - eLearning Platform</title>
   <style>
-    /* Base Reset */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #f4f6f9;
       color: #222;
+      margin: 0;
     }
 
     header {
@@ -19,10 +17,6 @@
       color: white;
       padding: 1.5rem;
       text-align: center;
-    }
-
-    header h1 {
-      font-size: 2.2rem;
     }
 
     nav ul {
@@ -116,59 +110,108 @@
       color: white;
       margin-top: 50px;
     }
+
+    /* Login Page Styling */
+    #login {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 90vh;
+    }
+
+    .login-box {
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      width: 300px;
+      text-align: center;
+    }
+
+    .login-box h2 {
+      margin-bottom: 20px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: 5px;
+    }
   </style>
 </head>
 <body>
 
 <header>
   <h1>Intellecta</h1>
-  <nav role="navigation" aria-label="Main Navigation">
+  <nav>
     <ul><li><a href="#" onclick="goHome()">🏠 Home</a></li></ul>
   </nav>
 </header>
 
-<div class="container">
-
-  <!-- Home View -->
-  <div id="home">
-    <h2>Select Your Class</h2>
-    <div class="grid" id="classGrid"></div>
+<!-- ✅ LOGIN PAGE -->
+<div id="login">
+  <div class="login-box">
+    <h2>Login</h2>
+    <input type="text" id="userid" placeholder="User ID" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <p class="error" id="errorMsg"></p>
   </div>
+</div>
 
-  <!-- Subjects View -->
-  <div id="subjects" style="display:none;">
-    <h2 id="subjectTitle">Subjects for Class</h2>
-    <div class="grid" id="subjectGrid"></div>
-    <button onclick="goHome()">← Back to Classes</button>
+<!-- ✅ MAIN APP CONTENT -->
+<div id="mainApp" style="display:none;">
+  <div class="container">
+
+    <!-- Home View -->
+    <div id="home">
+      <h2>Select Your Class</h2>
+      <div class="grid" id="classGrid"></div>
+    </div>
+
+    <!-- Subjects View -->
+    <div id="subjects" style="display:none;">
+      <h2 id="subjectTitle">Subjects for Class</h2>
+      <div class="grid" id="subjectGrid"></div>
+      <button onclick="goHome()">← Back to Classes</button>
+    </div>
+
+    <!-- Material View -->
+    <div id="materials" style="display:none;">
+      <h2 id="materialTitle">Materials</h2>
+
+      <section>
+        <h3>📘 NCERT Book</h3>
+        <ul class="material-list" id="ncertList"></ul>
+      </section>
+
+      <section>
+        <h3>❓ Important Questions</h3>
+        <ul class="material-list" id="impqList"></ul>
+      </section>
+
+      <section>
+        <h3>📝 Practice Papers</h3>
+        <ul class="material-list" id="practiceList"></ul>
+      </section>
+
+      <section>
+        <h3>📄 CBSE Past 2 Year Papers</h3>
+        <ul class="material-list" id="cbseList"></ul>
+      </section>
+
+      <button onclick="goSubjects()">← Back to Subjects</button>
+    </div>
+
   </div>
-
-  <!-- Material View -->
-  <div id="materials" style="display:none;">
-    <h2 id="materialTitle">Materials</h2>
-
-    <section>
-      <h3>📘 NCERT Book</h3>
-      <ul class="material-list" id="ncertList"></ul>
-    </section>
-
-    <section>
-      <h3>❓ Important Questions</h3>
-      <ul class="material-list" id="impqList"></ul>
-    </section>
-
-    <section>
-      <h3>📝 Practice Papers</h3>
-      <ul class="material-list" id="practiceList"></ul>
-    </section>
-
-    <section>
-      <h3>📄 CBSE Past 2 Year Papers</h3>
-      <ul class="material-list" id="cbseList"></ul>
-    </section>
-
-    <button onclick="goSubjects()">← Back to Subjects</button>
-  </div>
-
 </div>
 
 <footer>
@@ -176,6 +219,29 @@
 </footer>
 
 <script>
+  /********************
+   LOGIN SYSTEM
+  ********************/
+  function login() {
+    const user = document.getElementById("userid").value;
+    const pass = document.getElementById("password").value;
+    const errorMsg = document.getElementById("errorMsg");
+
+    // Hardcoded credentials
+    const validUser = "student";
+    const validPass = "1234";
+
+    if (user === validUser && pass === validPass) {
+      document.getElementById("login").style.display = "none";
+      document.getElementById("mainApp").style.display = "block";
+    } else {
+      errorMsg.innerText = "❌ Invalid User ID or Password!";
+    }
+  }
+
+  /********************
+   APP DATA (Classes 6–12, NCERT links included)
+  ********************/
   const data = {
     classes: ['6','7','8','9','10','11','12'],
     subjects: {
@@ -188,71 +254,100 @@
       '12': ['Physics','Chemistry','Biology','Mathematics','English']
     },
     materials: {
-      // ✅ Class 6
-      '6_Mathematics': { ncert: [{ title: "Class 6 Maths NCERT Book", link: "https://ncert.nic.in/textbook.php?femh1=0-14" }], impq: [], practice: [], cbse: [] },
-      '6_Science': { ncert: [{ title: "Class 6 Science NCERT Book", link: "https://ncert.nic.in/textbook.php?fesc1=0-16" }], impq: [], practice: [], cbse: [] },
-      '6_English': { ncert: [
-        { title: "Class 6 English (Honeysuckle)", link: "https://ncert.nic.in/textbook.php?fesh1=0-10" },
-        { title: "Class 6 English (A Pact With The Sun)", link: "https://ncert.nic.in/textbook.php?feap1=0-10" }
-      ], impq: [], practice: [], cbse: [] },
+      // ✅ CLASS 6
+      "6_Mathematics": {
+        ncert: [{title:"NCERT Class 6 Mathematics",link:"https://ncert.nic.in/textbook/pdf/femh1dd.zip"}]
+      },
+      "6_Science": {
+        ncert: [{title:"NCERT Class 6 Science",link:"https://ncert.nic.in/textbook/pdf/fesc1dd.zip"}]
+      },
+      "6_English": {
+        ncert: [{title:"NCERT Class 6 English",link:"https://ncert.nic.in/textbook/pdf/fegn1dd.zip"}]
+      },
 
-      // ✅ Class 7
-      '7_Mathematics': { ncert: [{ title: "Class 7 Maths NCERT Book", link: "https://ncert.nic.in/textbook.php?femh2=0-15" }], impq: [], practice: [], cbse: [] },
-      '7_Science': { ncert: [{ title: "Class 7 Science NCERT Book", link: "https://ncert.nic.in/textbook.php?fesc2=0-18" }], impq: [], practice: [], cbse: [] },
-      '7_English': { ncert: [
-        { title: "Class 7 English (Honeycomb)", link: "https://ncert.nic.in/textbook.php?fehc1=0-10" },
-        { title: "Class 7 English (An Alien Hand)", link: "https://ncert.nic.in/textbook.php?feah1=0-10" }
-      ], impq: [], practice: [], cbse: [] },
+      // ✅ CLASS 7
+      "7_Mathematics": {
+        ncert: [{title:"NCERT Class 7 Mathematics",link:"https://ncert.nic.in/textbook/pdf/gemh1dd.zip"}]
+      },
+      "7_Science": {
+        ncert: [{title:"NCERT Class 7 Science",link:"https://ncert.nic.in/textbook/pdf/gesc1dd.zip"}]
+      },
+      "7_English": {
+        ncert: [{title:"NCERT Class 7 English",link:"https://ncert.nic.in/textbook/pdf/gegn1dd.zip"}]
+      },
 
-      // ✅ Class 8
-      '8_Mathematics': { ncert: [{ title: "Class 8 Maths NCERT Book", link: "https://ncert.nic.in/textbook.php?femh3=0-16" }], impq: [], practice: [], cbse: [] },
-      '8_Science': { ncert: [{ title: "Class 8 Science NCERT Book", link: "https://ncert.nic.in/textbook.php?fesc3=0-16" }], impq: [], practice: [], cbse: [] },
-      '8_English': { ncert: [
-        { title: "Class 8 English (Honeydew)", link: "https://ncert.nic.in/textbook.php?fehd1=0-10" },
-        { title: "Class 8 English (It So Happened)", link: "https://ncert.nic.in/textbook.php?feis1=0-10" }
-      ], impq: [], practice: [], cbse: [] },
+      // ✅ CLASS 8
+      "8_Mathematics": {
+        ncert: [{title:"NCERT Class 8 Mathematics",link:"https://ncert.nic.in/textbook/pdf/hemh1dd.zip"}]
+      },
+      "8_Science": {
+        ncert: [{title:"NCERT Class 8 Science",link:"https://ncert.nic.in/textbook/pdf/hesc1dd.zip"}]
+      },
+      "8_English": {
+        ncert: [{title:"NCERT Class 8 English",link:"https://ncert.nic.in/textbook/pdf/hegn1dd.zip"}]
+      },
 
-      // ✅ Class 9
-      '9_Mathematics': { ncert: [{ title: "Class 9 Maths NCERT Book", link: "https://ncert.nic.in/textbook.php?iemh1=0-16" }], impq: [], practice: [], cbse: [] },
-      '9_Science': { ncert: [{ title: "Class 9 Science NCERT Book", link: "https://ncert.nic.in/textbook.php?iesc1=0-14" }],
-        impq: [{ title: "Set 1 Important Questions", link: "#" }], practice: [{ title: "Science Practice Paper 1", link: "#" }], cbse: [{ title: "CBSE 2024 Science Paper", link: "#" }] },
-      '9_English': { ncert: [
-        { title: "Class 9 English (Beehive)", link: "https://ncert.nic.in/textbook.php?iebe1=0-10" },
-        { title: "Class 9 English (Moments)", link: "https://ncert.nic.in/textbook.php?iemo1=0-10" }
-      ], impq: [], practice: [], cbse: [] },
+      // ✅ CLASS 9
+      "9_Mathematics": {
+        ncert: [{title:"NCERT Class 9 Mathematics",link:"https://ncert.nic.in/textbook/pdf/jemh1dd.zip"}]
+      },
+      "9_Science": {
+        ncert: [{title:"NCERT Class 9 Science",link:"https://ncert.nic.in/textbook/pdf/jesc1dd.zip"}]
+      },
+      "9_English": {
+        ncert: [{title:"NCERT Class 9 English",link:"https://ncert.nic.in/textbook/pdf/jegn1dd.zip"}]
+      },
 
-      // ✅ Class 10
-      '10_Mathematics': { ncert: [{ title: "Class 10 Maths NCERT Book", link: "https://ncert.nic.in/textbook.php?emhm1=0-14" }],
-        impq: [{ title: "Set 1 Important Questions", link: "#" }], practice: [{ title: "Maths Practice Paper", link: "#" }], cbse: [{ title: "CBSE 2024 Maths Paper", link: "#" }] },
-      '10_Science': { ncert: [{ title: "Class 10 Science NCERT Book", link: "https://ncert.nic.in/textbook.php?jesc1=0-16" }], impq: [], practice: [], cbse: [] },
-      '10_English': { ncert: [
-        { title: "Class 10 English (First Flight)", link: "https://ncert.nic.in/textbook.php?jeff1=0-10" },
-        { title: "Class 10 English (Footprints Without Feet)", link: "https://ncert.nic.in/textbook.php?jeff2=0-10" }
-      ], impq: [], practice: [], cbse: [] },
+      // ✅ CLASS 10
+      "10_Mathematics": {
+        ncert: [{title:"NCERT Class 10 Mathematics",link:"https://ncert.nic.in/textbook/pdf/kemh1dd.zip"}]
+      },
+      "10_Science": {
+        ncert: [{title:"NCERT Class 10 Science",link:"https://ncert.nic.in/textbook/pdf/kesc1dd.zip"}]
+      },
+      "10_English": {
+        ncert: [{title:"NCERT Class 10 English",link:"https://ncert.nic.in/textbook/pdf/kegn1dd.zip"}]
+      },
 
-      // ✅ Class 11
-      '11_Physics': { ncert: [{ title: "Class 11 Physics NCERT Book", link: "https://ncert.nic.in/textbook.php?keph1=0-14" }], impq: [], practice: [], cbse: [] },
-      '11_Chemistry': { ncert: [{ title: "Class 11 Chemistry NCERT Book", link: "https://ncert.nic.in/textbook.php?kech1=0-14" }], impq: [], practice: [], cbse: [] },
-      '11_Biology': { ncert: [{ title: "Class 11 Biology NCERT Book", link: "https://ncert.nic.in/textbook.php?kebo1=0-10" }], impq: [], practice: [], cbse: [] },
-      '11_Mathematics': { ncert: [{ title: "Class 11 Maths NCERT Book", link: "https://ncert.nic.in/textbook.php?kemh1=0-14" }], impq: [], practice: [], cbse: [] },
-      '11_English': { ncert: [
-        { title: "Class 11 English (Hornbill)", link: "https://ncert.nic.in/textbook.php?kehb1=0-08" },
-        { title: "Class 11 English (Snapshots)", link: "https://ncert.nic.in/textbook.php?kesp1=0-08" }
-      ], impq: [], practice: [], cbse: [] },
+      // ✅ CLASS 11
+      "11_Physics": {
+        ncert: [{title:"NCERT Class 11 Physics",link:"https://ncert.nic.in/textbook/pdf/leep1dd.zip"}]
+      },
+      "11_Chemistry": {
+        ncert: [{title:"NCERT Class 11 Chemistry",link:"https://ncert.nic.in/textbook/pdf/lech1dd.zip"}]
+      },
+      "11_Biology": {
+        ncert: [{title:"NCERT Class 11 Biology",link:"https://ncert.nic.in/textbook/pdf/lebo1dd.zip"}]
+      },
+      "11_Mathematics": {
+        ncert: [{title:"NCERT Class 11 Mathematics",link:"https://ncert.nic.in/textbook/pdf/lemh1dd.zip"}]
+      },
+      "11_English": {
+        ncert: [{title:"NCERT Class 11 English",link:"https://ncert.nic.in/textbook/pdf/leeg1dd.zip"}]
+      },
 
-      // ✅ Class 12
-      '12_Physics': { ncert: [{ title: "Class 12 Physics NCERT Book", link: "https://ncert.nic.in/textbook.php?leph1=0-14" }],
-        impq: [{ title: "Set 1 Important Questions", link: "#" }], practice: [{ title: "Physics Practice Paper", link: "#" }], cbse: [{ title: "CBSE 2024 Physics Paper", link: "#" }] },
-      '12_Chemistry': { ncert: [{ title: "Class 12 Chemistry NCERT Book", link: "https://ncert.nic.in/textbook.php?lech1=0-14" }], impq: [], practice: [], cbse: [] },
-      '12_Biology': { ncert: [{ title: "Class 12 Biology NCERT Book", link: "https://ncert.nic.in/textbook.php?lebo1=0-10" }], impq: [], practice: [], cbse: [] },
-      '12_Mathematics': { ncert: [{ title: "Class 12 Maths NCERT Book", link: "https://ncert.nic.in/textbook.php?lemh1=0-14" }], impq: [], practice: [], cbse: [] },
-      '12_English': { ncert: [
-        { title: "Class 12 English (Flamingo)", link: "https://ncert.nic.in/textbook.php?lefl1=0-10" },
-        { title: "Class 12 English (Vistas)", link: "https://ncert.nic.in/textbook.php?levi1=0-08" }
-      ], impq: [], practice: [], cbse: [] }
+      // ✅ CLASS 12
+      "12_Physics": {
+        ncert: [{title:"NCERT Class 12 Physics",link:"https://ncert.nic.in/textbook/pdf/leep1dd.zip"}]
+      },
+      "12_Chemistry": {
+        ncert: [{title:"NCERT Class 12 Chemistry",link:"https://ncert.nic.in/textbook/pdf/lech1dd.zip"}]
+      },
+      "12_Biology": {
+        ncert: [{title:"NCERT Class 12 Biology",link:"https://ncert.nic.in/textbook/pdf/lebo1dd.zip"}]
+      },
+      "12_Mathematics": {
+        ncert: [{title:"NCERT Class 12 Mathematics",link:"https://ncert.nic.in/textbook/pdf/lemh1dd.zip"}]
+      },
+      "12_English": {
+        ncert: [{title:"NCERT Class 12 English",link:"https://ncert.nic.in/textbook/pdf/leeg1dd.zip"}]
+      }
     }
   };
 
+  /********************
+   APP LOGIC
+  ********************/
   const classGrid = document.getElementById('classGrid');
   const subjectGrid = document.getElementById('subjectGrid');
   const ncertList = document.getElementById('ncertList');
@@ -263,9 +358,6 @@
   const homeView = document.getElementById('home');
   const subjectsView = document.getElementById('subjects');
   const materialsView = document.getElementById('materials');
-
-  let selectedClass = '';
-  let selectedSubject = '';
 
   function goHome() {
     homeView.style.display = 'block';
@@ -296,7 +388,6 @@
   }
 
   function loadSubjects(cls) {
-    selectedClass = cls;
     subjectGrid.innerHTML = '';
     document.getElementById('subjectTitle').innerText = `Subjects for Class ${cls}`;
     data.subjects[cls].forEach(sub => {
@@ -310,16 +401,10 @@
   }
 
   function loadMaterials(cls, sub) {
-    selectedSubject = sub;
     const materialKey = `${cls}_${sub}`;
     document.getElementById('materialTitle').innerText = `${sub} - Class ${cls}`;
 
-    const sectionMap = {
-      ncert: ncertList,
-      impq: impqList,
-      practice: practiceList,
-      cbse: cbseList
-    };
+    const sectionMap = { ncert: ncertList, impq: impqList, practice: practiceList, cbse: cbseList };
 
     Object.entries(sectionMap).forEach(([section, ul]) => {
       ul.innerHTML = '';
@@ -342,3 +427,4 @@
 
 </body>
 </html>
+
