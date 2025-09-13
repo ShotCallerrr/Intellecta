@@ -11,17 +11,17 @@
     /* Fonts & Background */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #121212, #1e1e2f);
+      background: linear-gradient(135deg, #0d0d0d, #1a1a2e);
       color: #ffffff;
     }
 
     /* Header */
     header {
-      background: linear-gradient(90deg, #2e003e, #0f4c81);
+      background: linear-gradient(90deg, #1f005c, #0f4c81, #8e2de2);
       color: #fff;
       padding: 1.5rem;
       text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.7);
     }
 
     header h1 {
@@ -64,20 +64,20 @@
     }
 
     .card {
-      background-color: #1e1e2f;
+      background-color: #1a1a2e;
       border-radius: 12px;
       padding: 25px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.7);
     }
 
     .card:hover {
       background: linear-gradient(135deg, #8e2de2, #4a00e0);
       color: #ffffff;
       transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.8);
     }
 
     /* Titles */
@@ -126,20 +126,20 @@
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.7);
     }
 
     button:hover {
       background: linear-gradient(90deg, #ff416c, #8e2de2);
       transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.8);
     }
 
     /* Footer */
     footer {
       text-align: center;
       padding: 20px;
-      background: linear-gradient(90deg, #2e003e, #0f4c81);
+      background: linear-gradient(90deg, #1f005c, #0f4c81, #8e2de2);
       color: white;
       margin-top: 50px;
     }
@@ -148,10 +148,10 @@
     #loginPage {
       max-width: 400px;
       margin: 80px auto;
-      background: #1e1e2f;
+      background: #1a1a2e;
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.7);
     }
 
     #loginPage h2 {
@@ -177,6 +177,7 @@
     #loginPage button {
       width: 100%;
     }
+
   </style>
 </head>
 <body>
@@ -191,12 +192,13 @@
 </header>
 
 <div class="container">
+
   <!-- Login Page -->
   <div id="loginPage">
     <h2>Login to EduEra</h2>
     <input type="text" id="userId" placeholder="Enter User ID" />
     <input type="password" id="userPass" placeholder="Enter Password" />
-    <button>Login</button>
+    <button onclick="login()">Login</button>
     <p id="loginError" style="color:red; margin-top:10px;"></p>
   </div>
 
@@ -210,7 +212,7 @@
   <div id="subjects" style="display:none;">
     <h2 id="subjectTitle">Subjects for Class</h2>
     <div class="grid" id="subjectGrid"></div>
-    <button>← Back to Classes</button>
+    <button onclick="goHome()">← Back to Classes</button>
   </div>
 
   <!-- Material View -->
@@ -237,33 +239,33 @@
       <ul class="material-list" id="cbseList"></ul>
     </section>
 
-    <button>← Back to Subjects</button>
+    <button onclick="goSubjects()">← Back to Subjects</button>
   </div>
+
 </div>
 
 <footer>
   <p>&copy; 2025 EduEra. All rights reserved.</p>
 </footer>
 
-</body>
-</html>
 <script>
-  // Demo credentials
-  const USER_ID = "student";
-  const USER_PASS = "password";
+  // Sample login credentials
+  const credentials = { id: "eduuser", pass: "edu123" };
 
   function login() {
-    const uid = document.getElementById('userId').value;
-    const upass = document.getElementById('userPass').value;
-    if (uid === USER_ID && upass === USER_PASS) {
+    const id = document.getElementById('userId').value;
+    const pass = document.getElementById('userPass').value;
+    const error = document.getElementById('loginError');
+    if(id === credentials.id && pass === credentials.pass) {
       document.getElementById('loginPage').style.display = 'none';
-      goHome();
+      document.getElementById('home').style.display = 'block';
+      loadClasses();
     } else {
-      document.getElementById('loginError').innerText = "Invalid User ID or Password!";
+      error.innerText = "Invalid ID or Password!";
     }
   }
 
-  // Dataset (NCERT + Practice + ImpQ + CBSE) -- you already asked me to add, we’ll keep that part same here
+  // Data
   const data = {
     classes: ['6','7','8','9','10','11','12'],
     subjects: {
@@ -275,6 +277,7 @@
       '11': ['Physics','Chemistry','Biology','Mathematics','English'],
       '12': ['Physics','Chemistry','Biology','Mathematics','English']
     },
+  
       materials: {
         // ✅ Class 6
         "6_Mathematics": {
@@ -406,8 +409,6 @@
         }
       }
     };
-
-
   const classGrid = document.getElementById('classGrid');
   const subjectGrid = document.getElementById('subjectGrid');
   const ncertList = document.getElementById('ncertList');
@@ -418,6 +419,9 @@
   const homeView = document.getElementById('home');
   const subjectsView = document.getElementById('subjects');
   const materialsView = document.getElementById('materials');
+
+  let selectedClass = '';
+  let selectedSubject = '';
 
   function goHome() {
     homeView.style.display = 'block';
@@ -438,6 +442,7 @@
   }
 
   function loadClasses() {
+    classGrid.innerHTML = '';
     data.classes.forEach(cls => {
       const div = document.createElement('div');
       div.className = 'card';
@@ -448,6 +453,7 @@
   }
 
   function loadSubjects(cls) {
+    selectedClass = cls;
     subjectGrid.innerHTML = '';
     document.getElementById('subjectTitle').innerText = `Subjects for Class ${cls}`;
     data.subjects[cls].forEach(sub => {
@@ -461,7 +467,8 @@
   }
 
   function loadMaterials(cls, sub) {
-    const materialKey = `${cls}_${sub}`;
+    selectedSubject = sub;
+    const key = `${cls}_${sub}`;
     document.getElementById('materialTitle').innerText = `${sub} - Class ${cls}`;
 
     const sectionMap = {
@@ -471,27 +478,21 @@
       cbse: cbseList
     };
 
-    Object.entries(sectionMap).forEach(([section, ul]) => {
-      ul.innerHTML = '';
-      if (data.materials[materialKey] && data.materials[materialKey][section]) {
-        data.materials[materialKey][section].forEach(item => {
+    Object.keys(sectionMap).forEach(k => sectionMap[k].innerHTML = '<li>No content yet.</li>');
+
+    if (data.materials[key]) {
+      for (const [section, list] of Object.entries(data.materials[key])) {
+        sectionMap[section].innerHTML = '';
+        list.forEach(item => {
           const li = document.createElement('li');
           li.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a>`;
-          ul.appendChild(li);
+          sectionMap[section].appendChild(li);
         });
-      } else {
-        ul.innerHTML = '<li>No content yet.</li>';
       }
-    });
-
+    }
     goMaterials();
   }
-
-  loadClasses();
 </script>
 
 </body>
 </html>
-
-
-  
