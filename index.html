@@ -5,7 +5,7 @@
   <title>Intellecta eLearning</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* Simple styles, embed CSS here or use separate file */
+    /* styles same as before */
     * { box-sizing: border-box; margin:0; padding:0; }
     body { font-family: Arial, sans-serif; background:#f4f4f4; color:#333; }
     .container { width:90%; max-width:1000px; margin:auto; padding:20px; }
@@ -34,7 +34,6 @@
     <nav>
       <ul>
         <li><a href="#" id="nav-home">Home</a></li>
-        <!-- Future: Login, Signup etc. -->
       </ul>
     </nav>
   </div>
@@ -94,7 +93,6 @@
 </footer>
 
 <script>
-// Sample data: classes, subjects, materials
 const data = {
   classes: ['6','7','8','9','10','11','12'],
   subjects: {
@@ -107,10 +105,9 @@ const data = {
     '12': ['Physics', 'Chemistry', 'Biology', 'Mathematics', 'English']
   },
   materials: {
-    // For example only: you replace with your own legal links / placeholders
     '6_Mathematics': {
       ncert: [
-        { title: "NCERT Maths Class 6 PDF (Official)", link: "https://ncert.nic.in/textbook/pdf/keeg1xx/ch1.pdf" /* placeholder official link */ }
+        { title: "NCERT Class 6 Mathematics (English) — Official PDF", link: "https://ncert.nic.in/textbook.php?le_ss=6&subject=Mathematics" }
       ],
       impq: [
         { title: "Important Questions Set 1", link: "#" },
@@ -121,11 +118,10 @@ const data = {
         { title: "Practice Paper 2", link: "#" }
       ]
     }
-    // Add more entries for other class_subject combos
+    // other class‐subject entries to add
   }
 };
 
-// References to DOM
 const homeView = document.getElementById('home-view');
 const classView = document.getElementById('class-view');
 const subjectView = document.getElementById('subject-view');
@@ -139,11 +135,9 @@ const ppList = document.getElementById('pp-list');
 const backToHomeBtn = document.getElementById('back-to-home');
 const backToClassBtn = document.getElementById('back-to-class');
 
-// Navigation
 let currentClass = null;
 let currentSubject = null;
 
-// Initialize home page
 function showHome() {
   homeView.style.display = '';
   classView.style.display = 'none';
@@ -170,7 +164,6 @@ function showClass(cls) {
 function showSubject(cls, sub) {
   currentSubject = sub;
   subjectTitle.textContent = `Class ${cls} — ${sub}`;
-  // Populate NCERT
   ncertList.innerHTML = '';
   impqList.innerHTML = '';
   ppList.innerHTML = '';
@@ -205,7 +198,6 @@ function showSubject(cls, sub) {
       ppList.appendChild(li);
     });
   } else {
-    // placeholders if no data
     ncertList.innerHTML = '<li>No NCERT book yet.</li>';
     impqList.innerHTML = '<li>No important questions yet.</li>';
     ppList.innerHTML = '<li>No practice papers yet.</li>';
@@ -216,7 +208,6 @@ function showSubject(cls, sub) {
   subjectView.style.display = '';
 }
 
-// Setup initial home
 data.classes.forEach(cls => {
   const a = document.createElement('a');
   a.className = 'card';
@@ -226,16 +217,10 @@ data.classes.forEach(cls => {
   classesList.appendChild(a);
 });
 
-// Back buttons
 backToHomeBtn.addEventListener('click', showHome);
-backToClassBtn.addEventListener('click', () => {
-  showClass(currentClass);
-});
+backToClassBtn.addEventListener('click', () => showClass(currentClass));
 
-// On load
 showHome();
-
 </script>
-
 </body>
 </html>
