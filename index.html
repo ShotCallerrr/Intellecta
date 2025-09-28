@@ -11,23 +11,25 @@
     /* Fonts & Background */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0d0d0d, #1a1a2e);
+      background: linear-gradient(135deg, #0a0a0a, #101820);
       color: #ffffff;
     }
 
     /* Header */
     header {
-      background: linear-gradient(90deg, #1f005c, #0f4c81, #8e2de2);
+      background: linear-gradient(90deg, #0d1b2a, #1b263b, #e63946);
       color: #fff;
       padding: 1.5rem;
       text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.7);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.8);
     }
 
     header h1 {
       font-size: 2.5rem;
       font-weight: bold;
       letter-spacing: 1px;
+      color: #ffffff;
+      text-shadow: 2px 2px 8px #000;
     }
 
     nav ul {
@@ -39,14 +41,14 @@
     }
 
     nav ul li a {
-      color: #00ffff;
+      color: #00bfff;
       text-decoration: none;
       font-weight: bold;
       transition: color 0.3s;
     }
 
     nav ul li a:hover {
-      color: #ff00ff;
+      color: #e63946;
     }
 
     /* Container */
@@ -64,20 +66,21 @@
     }
 
     .card {
-      background-color: #1a1a2e;
+      background-color: #1b263b;
       border-radius: 12px;
       padding: 25px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.8);
+      color: #ffffff;
     }
 
     .card:hover {
-      background: linear-gradient(135deg, #8e2de2, #4a00e0);
-      color: #ffffff;
+      background: linear-gradient(135deg, #e63946, #457b9d);
+      color: #f1faee;
       transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.9);
     }
 
     /* Titles */
@@ -85,12 +88,12 @@
       margin-bottom: 20px;
       font-size: 1.8rem;
       text-align: center;
-      color: #ffffff;
+      color: #f1faee;
     }
 
     h3 {
       margin: 20px 0 10px;
-      color: #cccccc;
+      color: #a8dadc;
     }
 
     /* Material List */
@@ -105,13 +108,13 @@
 
     ul.material-list li a {
       text-decoration: none;
-      color: #00ffff;
+      color: #00bfff;
       font-weight: 500;
       transition: color 0.3s;
     }
 
     ul.material-list li a:hover {
-      color: #ff00ff;
+      color: #e63946;
       text-decoration: underline;
     }
 
@@ -119,43 +122,44 @@
     button {
       margin-top: 20px;
       padding: 10px 25px;
-      background: linear-gradient(90deg, #8e2de2, #ff416c);
+      background: linear-gradient(90deg, #e63946, #1d3557);
       color: #ffffff;
       font-weight: bold;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.8);
     }
 
     button:hover {
-      background: linear-gradient(90deg, #ff416c, #8e2de2);
+      background: linear-gradient(90deg, #1d3557, #e63946);
       transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.9);
     }
 
     /* Footer */
     footer {
       text-align: center;
       padding: 20px;
-      background: linear-gradient(90deg, #1f005c, #0f4c81, #8e2de2);
+      background: linear-gradient(90deg, #0d1b2a, #1b263b, #e63946);
       color: white;
       margin-top: 50px;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.8);
     }
 
     /* Login Page */
     #loginPage {
       max-width: 400px;
       margin: 80px auto;
-      background: #1a1a2e;
+      background: #1b263b;
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.9);
     }
 
     #loginPage h2 {
-      color: #8e2de2;
+      color: #e63946;
       margin-bottom: 20px;
       text-align: center;
     }
@@ -166,12 +170,12 @@
       margin: 10px 0;
       border: 1px solid #444;
       border-radius: 6px;
-      background-color: #121212;
+      background-color: #0a0a0a;
       color: #ffffff;
     }
 
     #loginPage input::placeholder {
-      color: #888;
+      color: #bbb;
     }
 
     #loginPage button {
@@ -181,7 +185,6 @@
   </style>
 </head>
 <body>
-
 <header>
   <h1>EduEra</h1>
   <nav>
